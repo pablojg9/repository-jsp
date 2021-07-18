@@ -13,9 +13,10 @@
 <body>
     <%
         String name = request.getParameter("nome");
-        out.print(name);
+        String idade = request.getParameter("idade");
+        out.println("Nome: " + name);
+        out.println("Idade: " + idade);
+
     %>
-
-
 </body>
 </html>

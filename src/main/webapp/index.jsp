@@ -5,9 +5,20 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
-<h1>teste</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+    <h1>
+        <%
+            out.println("Olá, Mundo!");
+        %>
+    </h1>
+
+    <form action="receiveName.jsp" method="post">
+
+        <input name="nome">
+        <input name="idade">
+        <button type="submit">Enviar</button>
+
+    </form>
+
+
 </body>
 </html>
