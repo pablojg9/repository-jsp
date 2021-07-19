@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,10 +29,15 @@ public class ServletLogin extends HttpServlet {
        String login = request.getParameter("login");
        String password = request.getParameter("password");
 
-        Login modelLogin = new Login();
-        modelLogin.setLogin(login);
-        modelLogin.setPassword(password);
+       if (login != null && !login.isEmpty() && password != null && !password.isEmpty()) {
+           Login modelLogin = new Login();
+           modelLogin.setLogin(login);
+           modelLogin.setPassword(password);
+       } else {
+           RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+            request.setAttribute("message", "Login ou senha estão vazias!");
+            requestDispatcher.forward(request,response);
 
-
+       }
     }
 }
