@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Login;
+import utils.Message;
 
 @WebServlet(name = "ServletLogin", value = "/ServletLogin")
 public class ServletLogin extends HttpServlet {
@@ -33,11 +34,21 @@ public class ServletLogin extends HttpServlet {
            Login modelLogin = new Login();
            modelLogin.setLogin(login);
            modelLogin.setPassword(password);
+
+           RequestDispatcher requestDispatcher;
+
+           if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword().equalsIgnoreCase("admin")) {
+               requestDispatcher = request.getRequestDispatcher("main.jsp");
+           } else {
+               requestDispatcher = request.getRequestDispatcher("index.jsp");
+               request.setAttribute("message", Message.MESSAGE_ERROR);
+           }
+           requestDispatcher.forward(request, response);
+
        } else {
            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-            request.setAttribute("message", "Login ou senha estão vazias!");
-            requestDispatcher.forward(request,response);
-
+           request.setAttribute("message", Message.MESSAGE_ERROR);
+           requestDispatcher.forward(request, response);
        }
     }
 }
