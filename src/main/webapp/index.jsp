@@ -6,16 +6,23 @@
 </head>
 <body>
     <h1>
-        <%
-            out.println("Olá, Mundo!");
-        %>
+
     </h1>
 
-    <form action="receiveName.jsp" method="post">
+    <form action="ServletLogin" method="post">
+        <table>
 
-        <input name="nome">
-        <input name="idade">
-        <button type="submit">Enviar</button>
+            <tr>
+                <td><input name="login" type="text"></td>
+            </tr>
+            <tr>
+                <td><input name="password" type="password"></td>
+            </tr>
+            <tr>
+                <td><button name="enviar" type="submit">Enviar</button></td>
+            </tr>
+        </table>
+
 
     </form>
 
