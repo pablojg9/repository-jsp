@@ -45,8 +45,8 @@ public class FilterAuthentication implements Filter {
             requestDispatcher.forward(request, response);
 
             return; // Para a execução e redireciona para o login
+        } else {
+            chain.doFilter(request, response);
         }
-
-        chain.doFilter(request, response);
     }
 }

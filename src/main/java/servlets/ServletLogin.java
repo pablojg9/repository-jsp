@@ -29,6 +29,7 @@ public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String login = request.getParameter("login");
        String password = request.getParameter("password");
+       String url = request.getParameter("url");
 
        if (login != null && !login.isEmpty() && password != null && !password.isEmpty()) {
            Login modelLogin = new Login();
@@ -39,9 +40,12 @@ public class ServletLogin extends HttpServlet {
 
            if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
                    .equalsIgnoreCase("admin")) {
+               if (url == null || url.equals("null")) {
+                    url = "main.jsp";
+               }
 
                request.getSession().setAttribute("user", modelLogin.getLogin());
-               requestDispatcher = request.getRequestDispatcher("main.jsp");
+               requestDispatcher = request.getRequestDispatcher(url);
                requestDispatcher.forward(request, response);
 
            } else {
