@@ -36,11 +36,10 @@ public class FilterAuthentication implements Filter {
 
         String urlAuthenticate = req.getServletPath();//URL está sendo acessado
 
-        if (userLogged == null || (userLogged != null && userLogged.isEmpty()) &&
-            !urlAuthenticate.contains("ServletLogin")) { //Não está logado
+        if (userLogged == null && !urlAuthenticate.equalsIgnoreCase("/main/ServletLogin")) { //Não está logado
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp?url=" + urlAuthenticate);
-            request.setAttribute("msg", Message.MESSAGE_AUTHENTICATE);
+            request.setAttribute("message", Message.MESSAGE_AUTHENTICATE);
 
             requestDispatcher.forward(request, response);
 

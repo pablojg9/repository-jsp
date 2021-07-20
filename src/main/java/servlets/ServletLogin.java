@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Login;
 import utils.Message;
 
-@WebServlet(name = "ServletLogin", value = "/ServletLogin")
+@WebServlet(urlPatterns = {"/main/ServletLogin", "/ServletLogin"})
 public class ServletLogin extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -40,22 +40,23 @@ public class ServletLogin extends HttpServlet {
 
            if (modelLogin.getLogin().equalsIgnoreCase("admin") && modelLogin.getPassword()
                    .equalsIgnoreCase("admin")) {
+               request.getSession().setAttribute("user", modelLogin.getLogin());
+
                if (url == null || url.equals("null")) {
-                    url = "main.jsp";
+                    url = "main/main.jsp";
                }
 
-               request.getSession().setAttribute("user", modelLogin.getLogin());
                requestDispatcher = request.getRequestDispatcher(url);
                requestDispatcher.forward(request, response);
 
            } else {
-               requestDispatcher = request.getRequestDispatcher("index.jsp");
+               requestDispatcher = request.getRequestDispatcher("/index.jsp");
                request.setAttribute("message", Message.MESSAGE_ERROR);
            }
            requestDispatcher.forward(request, response);
 
        } else {
-           RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+           RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
            request.setAttribute("message", Message.MESSAGE_ERROR);
            requestDispatcher.forward(request, response);
        }
