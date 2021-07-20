@@ -1,14 +1,10 @@
 package filter;
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import utils.Message;
 
 import java.io.IOException;
 
@@ -33,6 +29,17 @@ public class FilterAuthentication implements Filter {
         String userLogged = (String) hasSession.getAttribute("user");
 
         String urlAuthenticate = req.getServletPath();//URL está sendo acessado
+
+        if (userLogged == null || (userLogged != null && userLogged.isEmpty()) &&
+            !urlAuthenticate.contains("ServletLogin")) { //Não está logado
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp?url=" + urlAuthenticate);
+            request.setAttribute("msg", Message.MESSAGE_AUTHENTICATE);
+
+            requestDispatcher.forward(request, response);
+
+            return; // Para a execução e redireciona para o login
+        }
 
         chain.doFilter(request, response);
     }
