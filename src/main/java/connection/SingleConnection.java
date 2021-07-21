@@ -17,7 +17,6 @@ public class SingleConnection {
 
     public SingleConnection() {
         connect();
-
     }
 
     private static void connect(){
