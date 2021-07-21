@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 
 public class SingleConnection {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/bancojsp";
-    private static final String user = "postgres";
-    private static final String password = "arma1234";
+    private static final String URL = "jdbc:postgresql://localhost:5432/bancojsp?autoReconnect=true";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "arma1234";
 
     private static Connection connection = null;
 
@@ -24,12 +24,9 @@ public class SingleConnection {
             if (connection == null)
             {
                 Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(url, user, password);
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
                 connection.setAutoCommit(false);
                 System.out.println("O banco foi conectado com sucesso!");
-                System.out.println("sout");
-                System.out.println("sout");
-                System.out.println("sout");
             }
         }catch (Exception e){
             e.printStackTrace();
