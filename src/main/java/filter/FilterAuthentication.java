@@ -62,6 +62,8 @@ public class FilterAuthentication implements Filter {
             } else {
                 chain.doFilter(request, response);
             }
+            CONNECTION.commit();
+
         } catch (Exception e) {
             e.printStackTrace();
             try {
