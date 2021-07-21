@@ -17,15 +17,15 @@ public class SingleConnection {
 
     public SingleConnection() {
         connect();
-    }
+    } // Quando tiver uma instancia irá conectar
 
     private static void connect(){
         try {
             if (CONNECTION == null)
             {
-                Class.forName("org.postgresql.Driver");
+                Class.forName("org.postgresql.Driver"); //Carrega o drive de conexão do banco
                 CONNECTION = DriverManager.getConnection(URL, USER, PASSWORD);
-                CONNECTION.setAutoCommit(false);
+                CONNECTION.setAutoCommit(false); //Para não efetuar alterações do bannco sem a permissão
                 System.out.println("O banco foi conectado com sucesso!");
             }
         }catch (Exception e){
