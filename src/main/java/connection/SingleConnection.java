@@ -9,7 +9,7 @@ public class SingleConnection {
     private static final String USER = "postgres";
     private static final String PASSWORD = "arma1234";
 
-    private static Connection connection = null;
+    private static Connection CONNECTION = null;
 
     static {
         connect();
@@ -21,11 +21,11 @@ public class SingleConnection {
 
     private static void connect(){
         try {
-            if (connection == null)
+            if (CONNECTION == null)
             {
                 Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                connection.setAutoCommit(false);
+                CONNECTION = DriverManager.getConnection(URL, USER, PASSWORD);
+                CONNECTION.setAutoCommit(false);
                 System.out.println("O banco foi conectado com sucesso!");
             }
         }catch (Exception e){
@@ -34,6 +34,6 @@ public class SingleConnection {
 
     }
     public static Connection getConnection() {
-        return connection;
+        return CONNECTION;
     }
 }
