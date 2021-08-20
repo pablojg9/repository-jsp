@@ -44,8 +44,6 @@ public class FilterAuthentication implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         try {
-
-
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession hasSession = req.getSession();
 
